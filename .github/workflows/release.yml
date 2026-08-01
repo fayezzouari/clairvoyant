@@ -57,3 +57,22 @@ jobs:
         with:
           files: burrito_out/*
           generate_release_notes: true
+
+  publish-hex:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: "26.2"
+          elixir-version: "1.17.3"
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Publish to Hex
+        env:
+          HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
+        run: mix hex.publish --yes
