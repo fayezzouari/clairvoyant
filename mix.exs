@@ -12,4 +12,19 @@ defmodule Clairvoyant.MixProject do
         ]
     end
 
+    def application do
+        [
+            extra_applications: [:logger]
+        ]
+    end
+
+    def deps do
+        [
+            {:ex_doc, "~> 0.30", only: :dev, runtime: false},
+            {:jason, "~> 1.4"},
+            {:httpoison, "~> 2.1"},
+            {:floki, "~> 0.34.0"}
+        ]
+    end
+
 end
