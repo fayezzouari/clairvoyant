@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: "26.2"
+          elixir-version: "1.17.3"
+
+      - uses: mlugg/setup-zig@v1
+        with:
+          version: "0.15.2"
+
+      - name: Install Burrito build tools (xz, 7z)
+        run: sudo apt-get update && sudo apt-get install -y xz-utils p7zip-full
+
+      - name: Restore deps/build cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Build standalone binaries for all targets
+        run: MIX_ENV=prod mix release
+        env:
+          MIX_ENV: prod
+
+      - name: List built binaries
+        run: ls -la burrito_out/
+
+      - name: Publish binaries to the GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: burrito_out/*
+          generate_release_notes: true
