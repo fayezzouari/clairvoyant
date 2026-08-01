@@ -1,12 +1,12 @@
-defmodule Depviz.Parser do
+defmodule Clairvoyant.Parser do
   @moduledoc """
   Behaviour every lockfile format parser implements.
   """
 
   @callback detect?(filename :: String.t()) :: boolean()
-  @callback parse(path :: String.t()) :: {:ok, Depviz.Graph.t()} | {:error, String.t()}
+  @callback parse(path :: String.t()) :: {:ok, Clairvoyant.Graph.t()} | {:error, String.t()}
 
-  @parsers [Depviz.Parsers.MixLock]
+  @parsers [Clairvoyant.Parsers.MixLock]
 
   @doc "Pick the right parser module for a given file path, by filename."
   @spec for_file(String.t()) :: {:ok, module()} | {:error, String.t()}

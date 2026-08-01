@@ -1,7 +1,7 @@
-defmodule Depviz.Renderer.Tree do
+defmodule Clairvoyant.Renderer.Tree do
   @moduledoc "Prints a Graph as an ASCII tree, starting from one or more roots."
 
-  alias Depviz.Graph
+  alias Clairvoyant.Graph
 
   @spec render(Graph.t(), keyword()) :: :ok
   def render(%Graph{} = graph, opts \\ []) do

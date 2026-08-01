@@ -1,4 +1,4 @@
-defmodule Depviz.CLI do
+defmodule Clairvoyant.CLI do
   @moduledoc "Entry point for the depviz escript."
 
   def main(args) do
@@ -23,14 +23,14 @@ defmodule Depviz.CLI do
   end
 
   defp run(path, opts) do
-    with {:ok, parser} <- Depviz.Parser.for_file(path),
+    with {:ok, parser} <- Clairvoyant.Parser.for_file(path),
          {:ok, graph} <- parser.parse(path) do
       render_opts =
         opts
         |> Keyword.take([:depth])
         |> add_direction(opts)
 
-      Depviz.Renderer.Tree.render(graph, render_opts)
+      Clairvoyant.Renderer.Tree.render(graph, render_opts)
     else
       {:error, reason} ->
         IO.puts(:stderr, "error: #{reason}")
