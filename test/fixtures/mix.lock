@@ -1,0 +1,6 @@
+%{
+  "jason": {:hex, :jason, "1.4.5", "2e3a008590b0b8d7388c20293e9dcc9cf3e5d642fd2a114e4cbbb52e595d940a", [:mix], [{:decimal, "~> 1.0 or ~> 2.0 or ~> 3.0", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm", "b0c823996102bcd0239b3c2444eb00409b72f6a140c1950bc8b457d836b30684"},
+  "phoenix": {:hex, :phoenix, "1.7.14", "abcdef", [:mix], [{:jason, "~> 1.0", [hex: :jason, repo: "hexpm", optional: false]}, {:plug, "~> 1.0", [hex: :plug, repo: "hexpm", optional: false]}], "hexpm", "abcdef"},
+  "plug": {:hex, :plug, "1.16.1", "abcdef", [:mix], [], "hexpm", "abcdef"},
+  "my_app": {:git, "https://example.com/my_app.git", "abcdef1234567890", []}
+}
