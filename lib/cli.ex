@@ -1,5 +1,5 @@
 defmodule Clairvoyant.CLI do
-  @moduledoc "Entry point for the depviz escript."
+  @moduledoc "Entry point for the clairvoyant escript."
 
   def main(args) do
     {opts, positional, invalid} =
@@ -55,10 +55,10 @@ defmodule Clairvoyant.CLI do
 
   defp print_usage do
     IO.puts("""
-    depviz — visualize a project's dependency tree from its lockfile
+    clairvoyant — visualize a project's dependency tree from its lockfile
 
     USAGE:
-        depviz <lockfile> [options]
+        clairvoyant <lockfile> [options]
 
     OPTIONS:
         --depth N       limit tree depth
@@ -67,10 +67,10 @@ defmodule Clairvoyant.CLI do
         --help, -h      show this help
 
     EXAMPLES:
-        depviz mix.lock
-        depviz mix.lock --depth 2
-        depviz mix.lock --only phoenix
-        depviz mix.lock --reverse jason
+        clairvoyant mix.lock
+        clairvoyant mix.lock --depth 2
+        clairvoyant mix.lock --only phoenix
+        clairvoyant mix.lock --reverse jason
     """)
   end
 end
