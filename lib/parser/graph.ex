@@ -21,4 +21,9 @@ defmodule Clairvoyant.Graph do
     else
       %{graph | edges: Map.put(graph.edges, from, [to | children])}
     end
+
+    @spec children(t(), name())::[name()]
+    def children(%__MODULE__{} = graph, name) do
+      Map.get(graph.edges, name, [])
+    end
 end
