@@ -23,7 +23,8 @@ defmodule Clairvoyant.MixProject do
             {:ex_doc, "~> 0.30", only: :dev, runtime: false},
             {:jason, "~> 1.4"},
             {:httpoison, "~> 2.1"},
-            {:floki, "~> 0.34.0"}
+            {:floki, "~> 0.34.0"},
+            {:toml, "~> 0.7"}
         ]
     end
 
