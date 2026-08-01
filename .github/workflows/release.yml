@@ -45,7 +45,7 @@ jobs:
         run: mix deps.get
 
       - name: Build standalone binaries for all targets
-        run: MIX_ENV=prod mix release
+        run: MIX_ENV=prod mix release --overwrite
         env:
           MIX_ENV: prod
 
