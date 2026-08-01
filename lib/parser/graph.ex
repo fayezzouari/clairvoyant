@@ -26,4 +26,18 @@ defmodule Clairvoyant.Graph do
     def children(%__MODULE__{} = graph, name) do
       Map.get(graph.edges, name, [])
     end
+
+    @spec parents(t(), name())::[name()]
+    def parents(%__MODULE__{} = graph, name) do
+      for {parent, children} <- graph.edges, name in children, do: parent
+    end
+
+    @spec roots(t())::[name()]
+    def roots(%__MODULE__{} = graph) do
+      all_children = graph.edges |> Map.values() |> List.flatten() |> MapSet.new()
+      graph.nodes
+      |> Map.keys()
+      |> Enum.filter(fn node -> not MapSet.member?(all_children, node) end)
+      |> Enum.sort()
+    end
 end
