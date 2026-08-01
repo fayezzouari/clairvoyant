@@ -21,31 +21,32 @@ defmodule Clairvoyant.Graph do
     else
       %{graph | edges: Map.put(graph.edges, from, [to | children])}
     end
+  end
 
-    @spec children(t(), name())::[name()]
-    def children(%__MODULE__{} = graph, name) do
-      Map.get(graph.edges, name, [])
-    end
+  @spec children(t(), name())::[name()]
+  def children(%__MODULE__{} = graph, name) do
+    Map.get(graph.edges, name, [])
+  end
 
-    @spec parents(t(), name())::[name()]
-    def parents(%__MODULE__{} = graph, name) do
-      for {parent, children} <- graph.edges, name in children, do: parent
-    end
+  @spec parents(t(), name())::[name()]
+  def parents(%__MODULE__{} = graph, name) do
+    for {parent, children} <- graph.edges, name in children, do: parent
+  end
 
-    @spec roots(t())::[name()]
-    def roots(%__MODULE__{} = graph) do
-      all_children = graph.edges |> Map.values() |> List.flatten() |> MapSet.new()
-      graph.nodes
-      |> Map.keys()
-      |> Enum.filter(fn node -> not MapSet.member?(all_children, node) end)
-      |> Enum.sort()
-    end
+  @spec roots(t())::[name()]
+  def roots(%__MODULE__{} = graph) do
+    all_children = graph.edges |> Map.values() |> List.flatten() |> MapSet.new()
+    graph.nodes
+    |> Map.keys()
+    |> Enum.filter(fn node -> not MapSet.member?(all_children, node) end)
+    |> Enum.sort()
+  end
 
-    @spec verison(t(), name())::String.t() | nil
-    def version(%__MODULE__{} = graph, name) do
-      case Map.get(graph.nodes, name) do
-        %{version: version} -> version
-        nil -> nil
-      end
+  @spec version(t(), name())::String.t() | nil
+  def version(%__MODULE__{} = graph, name) do
+    case Map.get(graph.nodes, name) do
+      %{version: version} -> version
+      nil -> nil
     end
+  end
 end
