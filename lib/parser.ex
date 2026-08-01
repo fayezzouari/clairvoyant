@@ -6,7 +6,12 @@ defmodule Clairvoyant.Parser do
   @callback detect?(filename :: String.t()) :: boolean()
   @callback parse(path :: String.t()) :: {:ok, Clairvoyant.Graph.t()} | {:error, String.t()}
 
-  @parsers [Clairvoyant.Parsers.MixLock]
+  @parsers [
+    Clairvoyant.Parsers.MixLock,
+    Clairvoyant.Parsers.UvLock,
+    Clairvoyant.Parsers.PoetryLock,
+    Clairvoyant.Parsers.CargoLock
+  ]
 
   @doc "Pick the right parser module for a given file path, by filename."
   @spec for_file(String.t()) :: {:ok, module()} | {:error, String.t()}
