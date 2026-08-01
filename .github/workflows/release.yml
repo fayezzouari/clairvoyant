@@ -21,7 +21,7 @@ jobs:
 
       - uses: mlugg/setup-zig@v1
         with:
-          version: "0.15.2"
+          version: "0.16.0"
 
       - name: Install Burrito build tools (xz, 7z)
         run: sudo apt-get update && sudo apt-get install -y xz-utils p7zip-full

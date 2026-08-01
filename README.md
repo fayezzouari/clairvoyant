@@ -66,6 +66,6 @@ git tag v0.1.0
 git push origin v0.1.0
 ```
 
-To build these locally, you need `zig` (0.15.x), `xz`, and `7z` on your
+To build these locally, you need `zig` (0.16.x), `xz`, and `7z` on your
 `PATH`, then run `MIX_ENV=prod mix release`. Binaries land in
 `burrito_out/`.
