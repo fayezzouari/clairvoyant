@@ -1,6 +1,8 @@
 defmodule Clairvoyant.MixProject do
     use Mix.Project
 
+    @source_url "https://github.com/fayezzouari/clairvoyant"
+
     def project do
         [
             app: :clairvoyant,
@@ -9,7 +11,19 @@ defmodule Clairvoyant.MixProject do
             start_permanent: Mix.env() == :prod,
             deps: deps(),
             escript: [main_module: Clairvoyant.CLI],
-            releases: releases()
+            releases: releases(),
+            description: "Visualize a project's dependency tree straight from its lockfile.",
+            package: package(),
+            source_url: @source_url,
+            homepage_url: @source_url,
+            docs: [main: "readme", extras: ["README.md"]]
+        ]
+    end
+
+    defp package do
+        [
+            licenses: ["MIT"],
+            links: %{"GitHub" => @source_url}
         ]
     end
 
