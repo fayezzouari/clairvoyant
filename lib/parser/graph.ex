@@ -40,4 +40,12 @@ defmodule Clairvoyant.Graph do
       |> Enum.filter(fn node -> not MapSet.member?(all_children, node) end)
       |> Enum.sort()
     end
+
+    @spec verison(t(), name())::String.t() | nil
+    def version(%__MODULE__{} = graph, name) do
+      case Map.get(graph.nodes, name) do
+        %{version: version} -> version
+        nil -> nil
+      end
+    end
 end
