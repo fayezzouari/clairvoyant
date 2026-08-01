@@ -19,9 +19,15 @@ jobs:
           otp-version: "26.2"
           elixir-version: "1.17.3"
 
-      - uses: mlugg/setup-zig@v1
-        with:
-          version: "0.16.0"
+      - name: Install Zig
+        env:
+          ZIG_VERSION: "0.16.0"
+        run: |
+          url="https://ziglang.org/download/${ZIG_VERSION}/zig-x86_64-linux-${ZIG_VERSION}.tar.xz"
+          curl -fsSL "$url" -o zig.tar.xz
+          sudo mkdir -p /usr/local/zig
+          sudo tar -xf zig.tar.xz -C /usr/local/zig --strip-components=1
+          echo "/usr/local/zig" >> "$GITHUB_PATH"
 
       - name: Install Burrito build tools (xz, 7z)
         run: sudo apt-get update && sudo apt-get install -y xz-utils p7zip-full
