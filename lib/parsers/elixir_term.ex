@@ -9,7 +9,7 @@ defmodule Clairvoyant.Parsers.ElixirTerm do
 
   @spec decode(String.t()) :: {:ok, term()} | {:error, String.t()}
   def decode(source) do
-    case Code.string_to_quoted(source) do
+    case Code.string_to_quoted(source, emit_warnings: false) do
       {:ok, ast} -> literal(ast)
       {:error, {_meta, message, token}} -> {:error, "#{message}#{token}"}
     end
